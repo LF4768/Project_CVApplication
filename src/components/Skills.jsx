@@ -29,8 +29,6 @@ function SkillTemplate({isActive}) {
     function skillsHandleAdd() {
         setSkills([...skills,{
             id: count,
-            title: <InputContainer isActive={isActive} placeHolder="Skill Name"/>,
-            desc: <InputContainer isActive={isActive} placeHolder="Skill Description" />
         }])
         setCount((prev) => prev + 1)
     }
@@ -45,7 +43,12 @@ function SkillTemplate({isActive}) {
             <ul>
                 {skills.map((item) => {
                     return (
-                        <li key={item.id}>{item.title} : {item.desc} <br/> <button key={item.id} onClick={() => skillsHandleRemove(item.id)}>Remove Skill</button></li>
+                        <li key={item.id}>
+                            
+                            <InputContainer isActive={isActive} placeHolder="Skill Name"/> : <InputContainer isActive={isActive} placeHolder="Skill Description"/> 
+                            <br/> 
+                            <button key={item.id} onClick={() => skillsHandleRemove(item.id)}>Remove Skill</button>
+                        </li>
                     )
                 })}
             </ul>
