@@ -16,17 +16,17 @@ export default function Summary() {
 
     return (
         <div className="summary-container">
-            <h1>Summary</h1>
+            <h1>SUMMARY</h1>
             <hr/>
             {isActive == 1 ? (
                 <>
-                <textarea onChange={handleText} className="summary-text" name="desc" id="desc"></textarea>
-                <button onClick={handleIsActive}>Submit</button>
+                    <textarea onChange={handleText} value={text} className="summary-text" name="desc" id="desc"></textarea>
+                    <button onClick={handleIsActive}>Submit</button>
                 </>
             ) : (
                 <>
-                <p>{text}</p>
-                <button onClick={handleIsActive}>Edit</button>
+                    <p>{text}</p>
+                    <button onClick={handleIsActive}>Edit</button>
                 </>
             )}
         </div>

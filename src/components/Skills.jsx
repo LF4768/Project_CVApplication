@@ -1,6 +1,6 @@
 import {useState} from "react"
 import "./../styles/Skills.css"
-
+import {InputComponent, ButtonComponent} from "./Elements.jsx"
 
 
 
@@ -13,46 +13,63 @@ export default function Skills() {
 
     return (
         <div className="skills-container">
-            <h1>Technical Skills</h1>
+            <h1>TECHNICAL SKILLS</h1>
             <hr/>
             <SkillTemplate isActive={isActive}/>
-            <button onClick={handleIsActive}>{isActive ? "Submit" : "Edit"}</button>
+            <ButtonComponent onClick={handleIsActive} condition={isActive}></ButtonComponent>
         </div>
     )
 }
+
 
 
 function SkillTemplate({isActive}) {
     const [skills, setSkills] = useState([])
     const [count, setCount] = useState(0)
 
-    function skillsHandleAdd() {
+    function handleAddSkill() {
         setSkills([...skills,{
             id: count,
+            name: "",
+            desc: ""
         }])
+
         setCount((prev) => prev + 1)
     }
 
-    function skillsHandleRemove(index) {
-        setSkills(skills.filter((item) => item.id != index))
+
+    function handleUpdateSkill(id,field,value) {
+        setSkills((prevSkills) => prevSkills.map((item) => item.id === id ? {...item, [field]: value}: item))
     }
 
 
+    function handleRemoveSkill(index) {
+        setSkills(skills.filter((item) => item.id != index))
+    }
+    
     return(
         <>
             <ul>
                 {skills.map((item) => {
                     return (
                         <li key={item.id}>
-                            
-                            <InputContainer isActive={isActive} placeHolder="Skill Name"/> : <InputContainer isActive={isActive} placeHolder="Skill Description"/> 
+                            <InputComponent  
+                                condition={isActive} 
+                                placeHolder="Skill Name" 
+                                value={item.name} 
+                                onChange={(val) => handleUpdateSkill(item.id,"name", val)}/> 
+                            : <InputComponent 
+                                condition={isActive} 
+                                placeHolder="Skill Description"
+                                value={item.desc}
+                                onChange={(val)=> handleUpdateSkill(item.id, "desc", val)}/> 
                             <br/> 
-                            <button key={item.id} onClick={() => skillsHandleRemove(item.id)}>Remove Skill</button>
+                            <button key={item.id} onClick={() => handleRemoveSkill(item.id)}>Remove Skill</button>
                         </li>
                     )
                 })}
             </ul>
-            {isActive == 1 && <button onClick={skillsHandleAdd}>Add Skill</button>}
+            {isActive == 1 && <button onClick={handleAddSkill}>Add Skill</button>}
         </>
     ) 
 
@@ -60,16 +77,3 @@ function SkillTemplate({isActive}) {
 }
 
 
-function InputContainer({placeHolder, isActive}) {
-    const [text,setText] = useState("")
-
-    function handleText(e) {
-        setText(e.target.value)
-    }
-
-    return(
-        <>
-            {isActive == 1 ? <input type="text" value={text} onChange={handleText} placeholder={"Enter " + placeHolder} /> : text}
-        </>
-    )
-}
