@@ -1,27 +1,8 @@
 import { useState } from "react";
-import { InputComponent, ButtonComponent, DetailsComponent } from "./Elements";
-
-export default function Experience() {
-    const [isActive, setIsActive] = useState(true)
-
-    function handleIsActive() {
-        setIsActive((prev) => !prev)
-    }
+import { InputComponent, DetailsComponent } from "./Elements";
 
 
-    return (
-        <div>
-            <h1>EXPERIENCE</h1>
-            <hr/>
-            <ExperienceTemplate isActive={isActive} />
-            <ButtonComponent onClick={handleIsActive} condition={isActive} />
-        </div>
-    )
-
-}
-
-
-function ExperienceTemplate({isActive}) {
+export default function ExperienceTemplate({isActive}) {
     const [experiences, setExperiences] = useState([])
 
     function handleAddExperience() {
@@ -43,7 +24,6 @@ function ExperienceTemplate({isActive}) {
         setExperiences((prev) => prev.filter((item) => item.id !== id))
     }
 
-    console.log(experiences)
 
     return (
         <div>
@@ -56,7 +36,7 @@ function ExperienceTemplate({isActive}) {
                         <div>
                             <InputComponent placeHolder="Role" condition={isActive} value={item.role} onChange={(e) => handleUpdateExperience(e, item.id, 'role')} />
                         </div>
-                        <DetailsComponent placeHolder="Point" details={item.details} onChange={(newDetails) => handleUpdateDetails(item.id, newDetails)} condition={isActive}/>
+                        <DetailsComponent placeHolder="Work" details={item.details} onChange={(newDetails) => handleUpdateDetails(item.id, newDetails)} condition={isActive}/>
                         <button onClick={() => handleRemoveExperience(item.id)}>Remove Experience</button>
                     </div>
                 )

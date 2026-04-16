@@ -1,25 +1,8 @@
 import {useState} from "react"
-import {InputComponent, ButtonComponent, DetailsComponent} from "./Elements.jsx"
+import {InputComponent, DetailsComponent} from "./Elements.jsx"
 
 
-export default function Projects() {
-    const [isActive, setIsActive] = useState(true)
-
-    function handleIsActive() {
-        setIsActive((prev) => !prev)
-    }
-
-    return (
-        <div>
-            <h1>PROJECTS</h1>
-            <hr/>
-            <ProjectTemplate isActive={isActive}/>
-            <ButtonComponent onClick={handleIsActive} condition={isActive}/>
-        </div>
-    )
-}   
-
-function ProjectTemplate({isActive}) {
+export default function ProjectTemplate({isActive}) {
     const [projects,setProjects] = useState([])
 
     function handleAddProject() {
@@ -41,7 +24,8 @@ function ProjectTemplate({isActive}) {
     function handleRemoveProject(index) {
         setProjects(projects.filter((item) => item.id != index))
     }
-    console.log(projects)
+
+    
     return (
         <>  
             {projects.map((item) => {

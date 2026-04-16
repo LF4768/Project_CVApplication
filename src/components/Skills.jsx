@@ -1,29 +1,9 @@
 import {useState} from "react"
 import "./../styles/Skills.css"
-import {InputComponent, ButtonComponent} from "./Elements.jsx"
+import {InputComponent} from "./Elements.jsx"
 
 
-
-export default function Skills() {
-    const [isActive,setIsActive] = useState(true)
-
-    function handleIsActive() {
-        setIsActive((prev) => !prev)
-    }
-
-    return (
-        <div className="skills-container">
-            <h1>TECHNICAL SKILLS</h1>
-            <hr/>
-            <SkillTemplate isActive={isActive}/>
-            <ButtonComponent onClick={handleIsActive} condition={isActive}></ButtonComponent>
-        </div>
-    )
-}
-
-
-
-function SkillTemplate({isActive}) {
+export default function SkillsTemplate({isActive}) {
     const [skills, setSkills] = useState([])
     const [count, setCount] = useState(0)
 

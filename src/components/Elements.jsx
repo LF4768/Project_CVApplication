@@ -1,5 +1,22 @@
 import { useState } from "react"
 
+function SectionComponent({name, template:Tag}) {
+    const [isActive, setIsActive] = useState(true)
+
+    const handleIsActive = () => setIsActive((prev) => !prev)
+
+    return (
+        <div>
+            <h1>{name}</h1>
+            <hr/>
+            <Tag isActive={isActive}/>
+            <ButtonComponent condition={isActive} onClick={handleIsActive} />
+        </div>
+    )
+
+}
+
+
 function InputComponent({placeHolder, condition, value, onChange}) {
     function handleText(e) {
         onChange(e.target.value)
@@ -50,4 +67,4 @@ function DetailsComponent({details, placeHolder, onChange, condition}) {
 }
 
 
-export {InputComponent, ButtonComponent, DetailsComponent}
+export {InputComponent, ButtonComponent, DetailsComponent, SectionComponent}
