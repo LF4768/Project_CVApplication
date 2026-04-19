@@ -36,7 +36,7 @@ function Header() {
             <ul className="details">
                 {contacts.map((item)=> <ContactDetails key={item.id} isActive={isActive} type={item.type} holderText={item.holderText}/>)}
             </ul>
-            <button onClick={handleIsActive}>Submit</button>
+            <button onClick={handleIsActive}>{isActive ? "Submit" : "Edit"}</button>
             <hr/>
         </div>
     )
@@ -70,15 +70,11 @@ function Name({isActive}) {
 function ContactDetails({type, holderText,isActive}) {
 
     const [text,setText] = useState("")
-    // const [isSubmitted,setIsSubmitted] = useState(false)
 
     function handleText(e) {
         setText(e.target.value)
     }
 
-    // function handleSubmit() {
-    //     setIsSubmitted((prev) => !prev)
-    // }
 
     return isActive == 0 ?  <li><span>{text}</span></li> :  <input type={type} value={text} onChange={handleText} placeholder={'Enter ' + holderText}></input>
 

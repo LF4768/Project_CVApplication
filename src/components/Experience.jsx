@@ -2,28 +2,33 @@ import { useState } from "react";
 import { InputComponent, DetailsComponent } from "./Elements";
 
 
-export default function ExperienceTemplate({isActive}) {
-    const [experiences, setExperiences] = useState([])
+export default function ExperienceTemplate({isActive, onChange,value}) {
+    const [experiences, setExperiences] = useState(value)
 
     function handleAddExperience() {
-        setExperiences([...experiences, {
+        const updated = [...experiences, {
             id: crypto.randomUUID(),
             details: []
-        }])
+        }]
+        setExperiences(updated)
+        onChange(updated, "EXPERIENCE")
     }
 
     function handleUpdateExperience(val, id,field) {
         setExperiences((prev) => prev.map((item) => item.id === id ? {...item, [field]: val} : item))
+        onChange(experiences, "EXPERIENCE")
     }
     
     function handleUpdateDetails(id, newDetails) {
         setExperiences((prev) => prev.map((item) => item.id === id ?  {...item, details: newDetails} : item))
+        onChange(experiences, "EXPERIENCE")
     }
 
     function handleRemoveExperience(id) {
-        setExperiences((prev) => prev.filter((item) => item.id !== id))
+        const updated = experiences.filter((item) => item.id !== id)
+        setExperiences(updated)
+        onChange(updated, "EXPERIENCE")
     }
-
 
     return (
         <div>

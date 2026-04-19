@@ -2,27 +2,33 @@ import {useState} from "react"
 import {InputComponent, DetailsComponent} from "./Elements.jsx"
 
 
-export default function ProjectTemplate({isActive}) {
-    const [projects,setProjects] = useState([])
+export default function ProjectTemplate({isActive, onChange,value}) {
+    const [projects,setProjects] = useState(value)
 
     function handleAddProject() {
-        setProjects([...projects, {
+        const updated = [...projects, {
             id: crypto.randomUUID(),
             details: []
-        }])
+        }]
+        setProjects(updated)
+        onChange(updated, "PROJECTS")
     }
 
     function handleUpdateProject(id,val,field) {
         setProjects((prevProjects) => prevProjects.map((item) => item.id === id ? {...item, [field]: val} : item))
+        onChange(projects, "PROJECTS")
     }
 
     function handleUpdateDetails(index, newDetails) {
         setProjects((prevProjects) => prevProjects.map((item) => item.id === index ? {...item, details: newDetails} : item))
+        onChange(projects, "PROJECTS")
     }
 
 
     function handleRemoveProject(index) {
-        setProjects(projects.filter((item) => item.id != index))
+        const updated = projects.filter((item) => item.id != index)
+        setProjects(updated)
+        onChange(updated, "PROJECTS")
     }
 
     
@@ -31,12 +37,12 @@ export default function ProjectTemplate({isActive}) {
             {projects.map((item) => {
                 return (
                     <div key={item.id}>
-                        <InputComponent 
+                        <b><InputComponent 
                             placeHolder="Project Name" 
                             condition={isActive} 
                             value={item.name} 
                             onChange={(val) => handleUpdateProject(item.id, val, 'name')}  
-                        />
+                        /></b>
                         <InputComponent 
                             placeHolder="Languages Used" 
                             condition={isActive}

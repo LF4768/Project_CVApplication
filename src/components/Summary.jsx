@@ -3,13 +3,11 @@ import "./../styles/Summary.css"
 
 
 
-export default function SummaryTemplate({isActive}) {
-    const [text,setText] = useState("")
-
+export default function SummaryTemplate({isActive,onChange,value}) {
 
     function handleText(e) {
-        setText(e.target.value)
+        onChange(e.target.value, "SUMMARY")
     }
 
-    return isActive == 1 ? <textarea onChange={handleText} value={text} className="summary-text" name="desc" id="desc"></textarea> : <p>{text}</p> 
+    return isActive == 1 ? <textarea onChange={handleText} value={value} className="summary-text" name="desc" id="desc"></textarea> : <p>{value}</p> 
 }

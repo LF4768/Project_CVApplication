@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function SectionComponent({name, template:Tag}) {
+function SectionComponent({name, template:Tag, value, onChange}) {
     const [isActive, setIsActive] = useState(true)
 
     const handleIsActive = () => setIsActive((prev) => !prev)
@@ -9,8 +9,7 @@ function SectionComponent({name, template:Tag}) {
         <div>
             <h1>{name}</h1>
             <hr/>
-            <Tag isActive={isActive}/>
-            <ButtonComponent condition={isActive} onClick={handleIsActive} />
+            <Tag isActive={isActive}  onChange={onChange} value={value}/>
         </div>
     )
 

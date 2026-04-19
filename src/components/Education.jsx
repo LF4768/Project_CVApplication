@@ -3,22 +3,29 @@ import { InputComponent} from "./Elements";
 
 
 
-export default function EducationTemplate({isActive}) {
-    const [education,setEducation] = useState([])
+export default function EducationTemplate({isActive, onChange,value}) {
+    const [education,setEducation] = useState(value)
 
     function handleAddEducation() {
-        setEducation([...education, {
+        const updated = [...education, {
             id: crypto.randomUUID(),
-        }])
+        }]
+        setEducation(updated)
+        onChange(updated, "EDUCATION")
     }
-
+    
     function handleUpdateEducation(id, val, field) {
         setEducation((prev) => prev.map((item) => item.id === id ? {...item, [field]: val} : item))
+        onChange(education,"EDUCATION")
+
     }
 
     function handleRemoveEducation(id) {
-        setEducation((prev) => prev.filter((item) => item.id !== id))
+        const updated = education.filter((item) => item.id != id)
+        setEducation(updated)
+        onChange(updated, "EDUCATION")
     }
+
 
     return (
         <div>
