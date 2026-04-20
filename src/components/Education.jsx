@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { InputComponent} from "./Elements";
-
+import "./../styles/Education.css"
 
 
 export default function EducationTemplate({isActive, onChange,value}) {
@@ -28,26 +28,30 @@ export default function EducationTemplate({isActive, onChange,value}) {
 
 
     return (
-        <div>
+        <>
             {education.map((item) =>  {
                 return (
-                    <div key={item.id}> 
-                        <InputComponent placeHolder="Institution Name" condition={isActive} value={item.institutionName} onChange={(e) => handleUpdateEducation(item.id, e, "institutionName")} />
-                        <InputComponent placeHolder="location" condition={isActive} value={item.location} onChange={(e) => handleUpdateEducation(item.id, e, "location")} />
-                        <InputComponent placeHolder="passing year" condition={isActive} value={item.timeline} onChange={(e) => handleUpdateEducation(item.id, e, "timeline")} />
-                        <div>
+                    <div className="education-section" key={item.id}> 
+                        <div className="education-input">
+                            <div>
+                                <InputComponent placeHolder="Institution Name" condition={isActive} value={item.institutionName} onChange={(e) => handleUpdateEducation(item.id, e, "institutionName")} />
+                                |<InputComponent placeHolder="location" condition={isActive} value={item.location} onChange={(e) => handleUpdateEducation(item.id, e, "location")} />
+                            </div>
+                            <InputComponent placeHolder="passing year" condition={isActive} value={item.timeline} onChange={(e) => handleUpdateEducation(item.id, e, "timeline")} />
+                        </div>
+                        <div className="education-desc">
                             <InputComponent placeHolder="Description" condition={isActive} value={item.desc} onChange={(e) => handleUpdateEducation(item.id, e, "desc")} />
                         </div>
-                        <div>
-                            Percentage/CGPA : <InputComponent placeHolder="Marks(with format)" condition={isActive} value={item.marks} onChange={(e) => handleUpdateEducation(item.id,e,"marks")} />
+                        <div className="education-marks">
+                            Percentage/CGPA : <InputComponent placeHolder="Marks(7.5/10)" condition={isActive} value={item.marks} onChange={(e) => handleUpdateEducation(item.id,e,"marks")} />
                         </div>
-                        <button onClick={() => handleRemoveEducation(item.id)}>Remove Education</button>
+                        <button className="remove-education-button" onClick={() => handleRemoveEducation(item.id)}>Remove Education</button>
                     </div>
                 )
                 
             })}
             <button onClick={handleAddEducation}>Add Education </button>
-        </div>
+        </>
     )
 
 }

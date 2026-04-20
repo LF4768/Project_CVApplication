@@ -1,5 +1,6 @@
 import {useState} from "react"
 import {InputComponent, DetailsComponent} from "./Elements.jsx"
+import "./../styles/Projects.css"
 
 
 export default function ProjectTemplate({isActive, onChange,value}) {
@@ -36,32 +37,32 @@ export default function ProjectTemplate({isActive, onChange,value}) {
         <>  
             {projects.map((item) => {
                 return (
-                    <div key={item.id}>
-                        <b><InputComponent 
-                            placeHolder="Project Name" 
-                            condition={isActive} 
-                            value={item.name} 
-                            onChange={(val) => handleUpdateProject(item.id, val, 'name')}  
-                        /></b>
-                        <InputComponent 
-                            placeHolder="Languages Used" 
-                            condition={isActive}
-                            value={item.languages}
-                            onChange={(val) => handleUpdateProject(item.id, val, 'languages')}
-                        />
-                        <InputComponent 
-                            placeHolder="Timeline"
-                            condition={isActive}
-                            value={item.year}
-                            onChange={(val) => handleUpdateProject(item.id, val, 'year')} 
-                        />
-
-                        <ul>
+                    <div className="projects-section" key={item.id}>
+                        <div className="projects-input">
+                            <div>
+                                <InputComponent 
+                                    placeHolder="Project Name" 
+                                    condition={isActive} 
+                                    value={item.name} 
+                                    onChange={(val) => handleUpdateProject(item.id, val, 'name')}  
+                                />
+                                <InputComponent 
+                                    placeHolder="Languages Used" 
+                                    condition={isActive}
+                                    value={item.languages}
+                                    onChange={(val) => handleUpdateProject(item.id, val, 'languages')}
+                                />
+                            </div>
+                            <InputComponent 
+                                placeHolder="Timeline"
+                                condition={isActive}
+                                value={item.year}
+                                onChange={(val) => handleUpdateProject(item.id, val, 'year')} 
+                            />
+                        </div>
                         <DetailsComponent placeHolder="Point" details={item.details} onChange={(newDetails) => handleUpdateDetails(item.id, newDetails)} condition={isActive}/> 
-
-                        </ul>
                         
-                        <button onClick={() => handleRemoveProject(item.id)}>Remove Project</button>
+                        <button className="remove-project-button" onClick={() => handleRemoveProject(item.id)}>Remove Project</button>
                     </div>
                 )
             })}

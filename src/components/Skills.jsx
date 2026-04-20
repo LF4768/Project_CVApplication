@@ -37,17 +37,19 @@ export default function SkillsTemplate({isActive, onChange}) {
                 {skills.map((item) => {
                     return (
                         <li key={item.id}>
-                            <InputComponent  
-                                condition={isActive} 
-                                placeHolder="Skill Name" 
-                                value={item.name} 
-                                onChange={(val) => handleUpdateSkill(item.id,"name", val)}/> 
-                            : <InputComponent 
-                                condition={isActive} 
-                                placeHolder="Skill Description"
-                                value={item.desc}
-                                onChange={(val)=> handleUpdateSkill(item.id, "desc", val)}/> 
-                            <br/> 
+                            <div className="skills-input">
+                                <InputComponent  
+                                    condition={isActive} 
+                                    placeHolder="Skill Name" 
+                                    value={item.name} 
+                                    onChange={(val) => handleUpdateSkill(item.id,"name", val)}/> 
+                                :   <InputComponent 
+                                    condition={isActive} 
+                                    placeHolder="Skill Description"
+                                    value={item.desc}
+                                    onChange={(val)=> handleUpdateSkill(item.id, "desc", val)}/> 
+                            </div>
+                            <br/>   
                             <button key={item.id} onClick={() => handleRemoveSkill(item.id)}>Remove Skill</button>
                         </li>
                     )

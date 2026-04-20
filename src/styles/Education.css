@@ -1,0 +1,23 @@
+.education-section{
+    position: relative;
+}
+
+.education-input {
+    display:flex;
+    justify-content: space-between;
+    margin-bottom:10px;
+}
+
+.education-desc {
+    margin-bottom:10px;
+}
+
+.education-marks{
+    margin-bottom:10px;
+}
+
+.remove-education-button {
+    position: absolute;
+    right: 0;
+    bottom:0px;
+}

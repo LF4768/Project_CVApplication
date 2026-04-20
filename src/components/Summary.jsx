@@ -9,5 +9,5 @@ export default function SummaryTemplate({isActive,onChange,value}) {
         onChange(e.target.value, "SUMMARY")
     }
 
-    return isActive == 1 ? <textarea onChange={handleText} value={value} className="summary-text" name="desc" id="desc"></textarea> : <p>{value}</p> 
+    return isActive == 1 ? <textarea className="summary-area" onChange={handleText} value={value} name="desc" id="desc"></textarea> : <p>{value}</p> 
 }

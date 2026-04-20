@@ -9,7 +9,7 @@ function SectionComponent({name, template:Tag, value, onChange}) {
         <div>
             <h1>{name}</h1>
             <hr/>
-            <Tag isActive={isActive}  onChange={onChange} value={value}/>
+            <Tag isActive={isActive}   onChange={onChange} value={value} />
         </div>
     )
 
@@ -52,9 +52,9 @@ function DetailsComponent({details, placeHolder, onChange, condition}) {
         <ul>
             {details.map((item) => {
                 return (
-                    <li key={item.id}>
-                        {condition ? <textarea value={item.val} placeholder={"Describe " + placeHolder} onChange={(e) => handleText(item.id, e.target.value)}></textarea> : <p>{item.val}</p>}
-                        <button onClick={() => handleRemoveItem(item.id)}>Remove {placeHolder}</button>
+                    <li className="details-component-list-item" key={item.id}>
+                        {condition ? <textarea className="details-component-textarea" value={item.val} placeholder={"Describe " + placeHolder} onChange={(e) => handleText(item.id, e.target.value)}></textarea> : <p>{item.val}</p>}
+                        <button className="details-component-remove-button" onClick={() => handleRemoveItem(item.id)}>Remove {placeHolder}</button>
                     
                     </li>
                 )

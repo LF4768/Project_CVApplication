@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { SectionComponent } from './components/Elements'
-import Header from './components/Header.jsx'
+import HeaderTemplate from './components/Header.jsx'
 import SummaryTemplate from './components/Summary.jsx'
 import SkillsTemplate from "./components/Skills.jsx"
 import ProjectsTemplate from "./components/Projects.jsx"
@@ -45,7 +45,13 @@ import EducationTemplate from './components/Education.jsx'
 function App() {
   const [value, setValue] = useState('SUMMARY')
   const [addSectionButton, setAddSectionButton] = useState(0)
-  const [parts,setParts] = useState([])
+  const [parts,setParts] = useState([{
+      name:"",
+      tag: HeaderTemplate,
+      content: [],
+      used: 0
+    },
+  ])
   const [sections, setSections] = useState(SECTION_DEFINATIONS)
   const [isActive,setIsActive] = useState(true)
 
@@ -78,19 +84,17 @@ function App() {
     setValue(sections.filter((item) => item.used == 0)[0].name)
     setAddSectionButton((prev) => !prev)
   }
-  console.log(parts)
 
   return (
     <>
     {isActive ? (
         <>
         <> 
-        <Header/>
         {parts.map((part) => {  
         return (
-          <div key={part.name}>
+          <div key={part.name} className="part">
             <SectionComponent  name={part.name} template={part.tag} onChange={(e,name) => handleUpdateContent(e,name)} value={part.content}/>
-            <button onClick={() => handleRemovePart(part.name)}>Remove Section</button>
+            {part.name != "" && <button className="remove-section-button" onClick={() => handleRemovePart(part.name)}>X</button>}
           </div>
         )
       })}
@@ -107,8 +111,8 @@ function App() {
 
           <button onClick={() => handleAddPart(value)}>Confirm</button>
         </>
-      ) : <button onClick={handleAddSectionButton}>+</button>}
-      <button onClick={handleIsActive}>HEOLHGPWSE</button> 
+      ) :  parts.length <= 5 && <button onClick={handleAddSectionButton}>+</button>}
+      <button className='final-submit-button' onClick={handleIsActive}>HEOLHGPWSE</button> 
       </>
         </>
 
@@ -124,12 +128,24 @@ function ShowContent({parts}) {
     <>
       {parts.map((item) =>{
         switch(item.name) {
+          case "":
+            return(
+              <div className='outer-container'>
+                <h1>{item.content.name}</h1>
+                <ul className='details'>
+                  {item.content.mobileNumber != "" && <li>{item.content.mobileNumber}</li>}
+                  {item.content.email != "" && <li>{item.content.email}</li>}
+                  {item.content.gitHub != "" && <li>{item.content.gitHub}</li>}
+                  {item.content.linkedIn != "" && <li>{item.content.linkedIn}</li>}
+                </ul>
+              </div>
+            ) 
           case "SUMMARY":
             return( 
               <div>
                 <h1>{item.name}</h1>
                 <hr/>
-                <p>{item.content}</p>
+                <p class="summary-text">{item.content}</p>
               </div>
             )
           case "PROJECTS":

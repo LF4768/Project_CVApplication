@@ -4,6 +4,11 @@
     justify-content:center;
 }
 
-.summary-text {
+.summary-area {
     height: 100px;
+    width:100%;
+}
+
+.summary-text {
+    word-break: break-all;
 }

@@ -1,0 +1,18 @@
+.projects-section {
+    position: relative;
+    padding:20px;
+}
+
+.projects-input {
+    display:flex;
+    justify-content: space-between;
+}
+
+
+
+
+.remove-project-button {
+    position: absolute;
+    right:0;
+    bottom:0;
+}

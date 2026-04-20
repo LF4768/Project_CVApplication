@@ -1,86 +1,39 @@
 import {useState} from "react"
 import "./../styles/Header.css"
+import { InputComponent } from "./Elements.jsx"
 
-function Header() {
-    const [isActive,setIsActive] = useState(true)
+function HeaderTemplate({isActive, onChange,value}) {
+    const [data,setData] = useState(
+        {
+            name: "",
+            mobileNumber: "",
+            email: "",
+            gitHub: "" ,
+            linkedIn: ""
+        }
+    )
 
-    function handleIsActive() {
-        setIsActive((prevValue) => !prevValue)
+    function handleUpdateData(field,val) {
+        const updated = {...data, [field]: val}
+        setData(updated)
+        onChange(updated, "")
     }
 
-    const contacts = [
-        {
-            id:0,
-            type: "tel",
-            holderText: "Mobile Number"
-        },
-        {
-            id:1,
-            type: "email",
-            holderText: "Email ID"
-        },
-        {
-            id:2,
-            type: "text",
-            holderText: "GitHub"
-        },
-        {
-            id:3,
-            type: "text",
-            holderText: "LinkedIn"
-        }
-    ]
     return (
         <div className="outer-container">
-            <Name isActive={isActive}/>
+            <InputComponent placeHolder="Name" value={value.name} condition={isActive} onChange={(e) => handleUpdateData("name" , e)}/>
             <ul className="details">
-                {contacts.map((item)=> <ContactDetails key={item.id} isActive={isActive} type={item.type} holderText={item.holderText}/>)}
+                <InputComponent placeHolder="Mobile Number" value={value.mobileNumber} condition={isActive} onChange={(e) => handleUpdateData("mobileNumber" , e)}/>
+                <InputComponent placeHolder="Email ID" value={value.email} condition={isActive} onChange={(e) => handleUpdateData("email" , e)}/>
+                <InputComponent placeHolder="GitHub" value={value.gitHub} condition={isActive} onChange={(e) => handleUpdateData("gitHub" , e)}/>
+                <InputComponent placeHolder="LinkedIn" condition={isActive} value={value.linkedIn} onChange={(e) => handleUpdateData("linkedIn" , e)}/>
             </ul>
-            <button onClick={handleIsActive}>{isActive ? "Submit" : "Edit"}</button>
             <hr/>
         </div>
     )
 }
 
-function Name({isActive}) {
-
-    const [text, setText] = useState("")
-
-    function handleText(event) {
-        setText(event.target.value)
-    }
 
 
 
-    if(isActive) {
-        return (
-            <div className="name-input">
-                <input type="text" onChange={handleText} value={text} name="name" id="name" placeholder="Enter Your Name Here"/>
-            </div>
-        )
-    } else {
-        return (
-            <div className="name-input">
-                <h1 className="name">{text}</h1>
-            </div>
-        )
-    }
-}
-
-function ContactDetails({type, holderText,isActive}) {
-
-    const [text,setText] = useState("")
-
-    function handleText(e) {
-        setText(e.target.value)
-    }
-
-
-    return isActive == 0 ?  <li><span>{text}</span></li> :  <input type={type} value={text} onChange={handleText} placeholder={'Enter ' + holderText}></input>
-
-
-}
-
-
-
-export default Header
+export default HeaderTemplate
