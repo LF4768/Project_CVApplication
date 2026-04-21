@@ -4,15 +4,49 @@
 }
 
 .projects-input {
+    margin-top:20px;
     display:flex;
     justify-content: space-between;
+    font-size: 15px;
+}
+
+.projects-info{ 
+    display:flex;
+}
+
+.projects-name {
+    margin-right:5px;
+    font-weight:bold;
 }
 
 
+.projects-languages {
+    margin-left:5px;
+}
 
+.projects-timeline {
+    font-weight:bold;
+}
+
+.projects-details-list {
+    margin: 5px;
+}
+
+.projects-details-list > li {
+    margin: 5px;
+    word-break: break-all;
+}
+
+
+.projects-detail-list-item {
+    font-size:16px;
+    margin:0px;
+    font-family: garamond;
+}
 
 .remove-project-button {
     position: absolute;
     right:0;
     bottom:0;
 }
+

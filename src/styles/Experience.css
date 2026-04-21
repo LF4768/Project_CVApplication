@@ -1,5 +1,46 @@
 .experiences-input {
-    display:flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  margin-top:20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.experiences-info {
+  display: flex;
+}
+
+.experiences-company-name {
+  margin-right:5px;
+
+}
+.experiences-location {
+  margin-left:5px;
+}
+
+
+.experiences-role {
+  margin-left: 10px;
+  font-size:15px;
+}
+
+.experiences-details-list {
+  margin:5px;
+}
+
+
+.experiences-details-list > li {
+  margin:5px;
+  word-break: break-all;
+}
+
+.experiences-detail-list-item {
+  font-size:16px;
+  margin:0px;
+  font-family: garamond;
+}
+
+.remove-experience-button {
+  margin-bottom:20px;
 }

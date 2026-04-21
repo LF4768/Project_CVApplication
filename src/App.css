@@ -50,3 +50,27 @@
   color:white;
 }
 
+.select-container {
+  display:flex;
+  justify-content: center;
+  padding:10px;
+}
+
+.confirm-button {
+  height:20px;
+  width:80px;
+  font-weight:bold;
+  margin-left:10px;
+}
+
+.view-mode-button {
+  margin-top:300px;
+}
+
+
+
+p {
+  margin:0px;
+  word-break: break-all;
+}
+

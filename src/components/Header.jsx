@@ -2,21 +2,21 @@ import {useState} from "react"
 import "./../styles/Header.css"
 import { InputComponent } from "./Elements.jsx"
 
-function HeaderTemplate({isActive, onChange,value}) {
-    const [data,setData] = useState(
-        {
+function HeaderTemplate({isActive, onChange,value}) 
+
+    {
+    const [data,setData] = useState({
             name: "",
             mobileNumber: "",
             email: "",
             gitHub: "" ,
             linkedIn: ""
-        }
-    )
+        })
 
     function handleUpdateData(field,val) {
         const updated = {...data, [field]: val}
         setData(updated)
-        onChange(updated, "")
+        onChange(updated, "HEADER")
     }
 
     return (

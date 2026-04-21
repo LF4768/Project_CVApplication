@@ -23,7 +23,7 @@ function InputComponent({placeHolder, condition, value, onChange}) {
 
     return(
         <>
-            {condition == 1 ? <input type="text" value={value} onChange={handleText} placeholder={"Enter " + placeHolder} /> : value}
+            {condition == 1 ? <input type="text" value={value || ""} onChange={handleText} placeholder={"Enter " + placeHolder} /> : value}
         </>
     )
 }

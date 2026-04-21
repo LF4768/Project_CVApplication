@@ -9,6 +9,10 @@ export default function ExperienceTemplate({isActive, onChange,value}) {
     function handleAddExperience() {
         const updated = [...experiences, {
             id: crypto.randomUUID(),
+            companyName: "",
+            location: '',
+            timeline: '',
+            role: '',
             details: []
         }]
         setExperiences(updated)
@@ -16,13 +20,15 @@ export default function ExperienceTemplate({isActive, onChange,value}) {
     }
 
     function handleUpdateExperience(val, id,field) {
-        setExperiences((prev) => prev.map((item) => item.id === id ? {...item, [field]: val} : item))
-        onChange(experiences, "EXPERIENCE")
+        const updated = experiences.map((item) => item.id === id ? {...item, [field]: val} : item)
+        setExperiences(updated)
+        onChange(updated, "EXPERIENCE")
     }
     
     function handleUpdateDetails(id, newDetails) {
-        setExperiences((prev) => prev.map((item) => item.id === id ?  {...item, details: newDetails} : item))
-        onChange(experiences, "EXPERIENCE")
+        const updated = experiences.map((item) => item.id === id ?  {...item, details: newDetails} : item)
+        setExperiences(updated)
+        onChange(updated, "EXPERIENCE")
     }
 
     function handleRemoveExperience(id) {
@@ -39,13 +45,13 @@ export default function ExperienceTemplate({isActive, onChange,value}) {
                         <div className="experiences-input">
                             <div>
                                 <InputComponent placeHolder="Company Name" condition={isActive} value={item.companyName} onChange={(e) => handleUpdateExperience(e, item.id, 'companyName')} />
-                                <InputComponent placeHolder="Location" condition={isActive} value={item.location} onChange={(e) => handleUpdateExperience(e, item.id, 'location')} />
+                                |<InputComponent placeHolder="Location" condition={isActive} value={item.location} onChange={(e) => handleUpdateExperience(e, item.id, 'location')} />
                             </div>
                             <InputComponent placeHolder="Timeline" condition={isActive} value={item.timeline} onChange={(e) => handleUpdateExperience(e, item.id, 'timeline')} />
                         </div>
                         <InputComponent placeHolder="Role" condition={isActive} value={item.role} onChange={(e) => handleUpdateExperience(e, item.id, 'role')} />
                         <DetailsComponent placeHolder="Work" details={item.details} onChange={(newDetails) => handleUpdateDetails(item.id, newDetails)} condition={isActive}/>
-                        <button onClick={() => handleRemoveExperience(item.id)}>Remove Experience</button>
+                        <button className="remove-experience-button" onClick={() => handleRemoveExperience(item.id)}>Remove Experience</button>
                     </div>
                 )
             })}   

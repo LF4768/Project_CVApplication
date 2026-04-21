@@ -9,6 +9,8 @@ export default function ProjectTemplate({isActive, onChange,value}) {
     function handleAddProject() {
         const updated = [...projects, {
             id: crypto.randomUUID(),
+            languages: "",
+            year: "",
             details: []
         }]
         setProjects(updated)
@@ -16,13 +18,15 @@ export default function ProjectTemplate({isActive, onChange,value}) {
     }
 
     function handleUpdateProject(id,val,field) {
-        setProjects((prevProjects) => prevProjects.map((item) => item.id === id ? {...item, [field]: val} : item))
-        onChange(projects, "PROJECTS")
+        const updated = projects.map((item) => item.id === id ? {...item, [field]: val} : item)
+        setProjects(updated)
+        onChange(updated, "PROJECTS")
     }
 
     function handleUpdateDetails(index, newDetails) {
-        setProjects((prevProjects) => prevProjects.map((item) => item.id === index ? {...item, details: newDetails} : item))
-        onChange(projects, "PROJECTS")
+        const updated = projects.map((item) => item.id === index ? {...item, details: newDetails} : item)
+        setProjects(updated)
+        onChange(updated, "PROJECTS")
     }
 
 

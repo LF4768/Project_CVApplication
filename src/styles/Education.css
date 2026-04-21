@@ -5,11 +5,13 @@
 .education-input {
     display:flex;
     justify-content: space-between;
-    margin-bottom:10px;
+    margin-bottom:5px;
+    font-weight: bold;
 }
 
 .education-desc {
-    margin-bottom:10px;
+    margin-bottom:5px;
+    font-family: garamond;
 }
 
 .education-marks{
@@ -20,4 +22,31 @@
     position: absolute;
     right: 0;
     bottom:0px;
+}
+
+.education-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.education-details {
+  display: flex;
+  justify-content: space-between;
+  flex:1;
+  font-weight: bold;
+}
+
+.education-institution-details {
+  display: flex;
+  margin-bottom: 5px;
+  font-size:17px;
+}
+
+.education-institution-name {
+  display: flex;
+  margin-right: 5px;
+}
+.education-institution-location {
+  display: flex;
+  margin-left: 5px;
 }

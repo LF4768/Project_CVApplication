@@ -46,7 +46,7 @@ function App() {
   const [value, setValue] = useState('SUMMARY')
   const [addSectionButton, setAddSectionButton] = useState(0)
   const [parts,setParts] = useState([{
-      name:"",
+      name:"HEADER",
       tag: HeaderTemplate,
       content: [],
       used: 0
@@ -93,15 +93,15 @@ function App() {
         {parts.map((part) => {  
         return (
           <div key={part.name} className="part">
-            <SectionComponent  name={part.name} template={part.tag} onChange={(e,name) => handleUpdateContent(e,name)} value={part.content}/>
-            {part.name != "" && <button className="remove-section-button" onClick={() => handleRemovePart(part.name)}>X</button>}
+            {<SectionComponent  name={part.name == "HEADER" ? "" : part.name} template={part.tag} onChange={(e,name) => handleUpdateContent(e,name)} value={part.content}/>}
+            {part.name != "HEADER" && <button className="remove-section-button" onClick={() => handleRemovePart(part.name)}>X</button>}
           </div>
         )
       })}
       </>
       <> 
       {addSectionButton ? (
-        <>
+        <div className='select-container'>
           <select  onClick={(e) => setValue(e.target.value)}>
               <option disabled>Select New Section</option>
               {sections.map((part) => {
@@ -109,15 +109,15 @@ function App() {
               })}
           </select>
 
-          <button onClick={() => handleAddPart(value)}>Confirm</button>
-        </>
+          <button className='confirm-button' onClick={() => handleAddPart(value)}>Confirm</button>
+        </div>
       ) :  parts.length <= 5 && <button onClick={handleAddSectionButton}>+</button>}
-      <button className='final-submit-button' onClick={handleIsActive}>HEOLHGPWSE</button> 
+      <button className='view-mode-button' onClick={handleIsActive}>View Mode</button> 
       </>
         </>
 
  
-        ) :<> <ShowContent parts={parts}/> <button onClick={handleIsActive}>HEOLHGPWSE</button></>}
+        ) :<> <ShowContent parts={parts}/> <button onClick={handleIsActive}>Edit Mode</button></>}
 
     </>
   )
@@ -128,46 +128,50 @@ function ShowContent({parts}) {
     <>
       {parts.map((item) =>{
         switch(item.name) {
-          case "":
+          case "HEADER":
             return(
-              <div className='outer-container'>
+              <div key={item.content.name}  className='outer-container'>
                 <h1>{item.content.name}</h1>
-                <ul className='details'>
-                  {item.content.mobileNumber != "" && <li>{item.content.mobileNumber}</li>}
-                  {item.content.email != "" && <li>{item.content.email}</li>}
-                  {item.content.gitHub != "" && <li>{item.content.gitHub}</li>}
-                  {item.content.linkedIn != "" && <li>{item.content.linkedIn}</li>}
+                <ul  className='details'>
+                  {item.content.mobileNumber != "" && <li key={item.content.mobileNumber}>{item.content.mobileNumber}</li>}
+                  {item.content.email != "" && <li key={item.content.email}>{item.content.email}</li>}
+                  {item.content.gitHub != "" && <li key={item.content.gitHub}>{item.content.gitHub}</li>}
+                  {item.content.linkedIn != "" && <li key={item.content.linkedIn}>{item.content.linkedIn}</li>}
                 </ul>
               </div>
             ) 
           case "SUMMARY":
             return( 
-              <div>
+              <div key={item.name}>
                 <h1>{item.name}</h1>
                 <hr/>
-                <p class="summary-text">{item.content}</p>
+                <p className="summary-text">{item.content}</p>
               </div>
             )
           case "PROJECTS":
             return (
-              <div>
+              <div key={item.name}>
                 <h1>{item.name}</h1>
                 <hr/>
                 <div>
                   {item.content.map((part) => {
                     return (
-                      <>
-                        <p>{part.name}</p>
-                        <p>{part.languages}</p>
-                        <p>{part.year}</p>
+                      <div key={part.name}>
+                        <div className='projects-input'>
+                          <div className='projects-info'>
+                            <p className='projects-name'>{part.name}</p>  
+                            {part.languages != "" && "|"} <p className='projects-languages'>{part.languages}</p> 
+                          </div>
+                          <p className='projects-timeline'>{part.year}</p>
+                        </div>
                         {part.details.map((detail) => {
                           return (
-                            <ul>
-                                <li>{detail.val}</li>
+                            <ul className='projects-details-list'>
+                                {detail.val != "" && <li key={detail.val} className="projects-detail-list-item">{detail.val}</li>}
                             </ul>
                           )
                         })}
-                      </>
+                      </div>
                     )
                   })}
                 </div>
@@ -175,25 +179,29 @@ function ShowContent({parts}) {
             )
             case "EXPERIENCE":
             return (
-              <div>
+              <div key={item.name}>
                 <h1>{item.name}</h1>
                 <hr/>
                 <div>
                   {item.content.map((part) => {
                     return (
-                      <>
-                        <p>{part.companyName}</p>
-                        <p>{part.location}</p>
-                        <p>{part.timeline}</p>
-                        <p>{part.role}</p>
-                        {part.details.map((detail) => {
-                          return (
-                            <ul>
-                                <li>{detail.val}</li>
-                            </ul>
-                          )
-                        })}
-                      </>
+                      <div key={part.name}>
+                        <div className='experiences-input'>
+                          <div className='experiences-info'>
+                            <p className='experiences-company-name'>{part.companyName}</p> {part.location != "" && "|"}
+                            <p className='experiences-location'>{part.location}</p>
+                          </div>
+                            <p>{part.timeline}</p>
+                          </div>
+                          <p className='experiences-role'>{part.role}</p>
+                          {part.details.map((detail) => {
+                            return (
+                              <ul className='experiences-details-list'>
+                                  {detail.  val != "" && <li key={detail.val} className="experiences-detail-list-item">{detail.val}</li>}
+                              </ul>
+                            )
+                          })}
+                        </div>
                     )
                   })}
                 </div>
@@ -201,16 +209,16 @@ function ShowContent({parts}) {
             )              
             case "SKILLS":
               return (
-                <div>
+                <div key={item.name}>
                   <h1>{item.name}</h1>
                   <hr/>
                   <div>
                     {item.content.map((part) => {
                       return (
-                        <>
-                          <p>{part.name}</p>
-                          <p>{part.desc}</p>
-                        </>
+                        <div key={part.name} className="skills-display">
+                          <p className="skills-name">{part.name}</p> {part.desc != "" && ": "}
+                          <p className='skills-desc'>{part.desc}</p>
+                        </div>
                       )
                     })}
                   </div>
@@ -218,19 +226,24 @@ function ShowContent({parts}) {
               )
               case "EDUCATION":
               return (
-                <div>
+                <div key={item.name}>
                   <h1>{item.name}</h1>
                   <hr/>
                   <div>
                     {item.content.map((part) => {
                       return (
-                        <>
-                          <p>{part.institutionName}</p>
-                          <p>{part.location}</p>
-                          <p>{part.timeline}</p>
-                          <p>{part.desc}</p>
-                          <p>{part.marks}</p>
-                        </>
+                        <div className="education-display">
+                          <div className='education-input'>
+                            <div className='education-institution-details'>
+                              <p className='education-institution-name'>{part.institutionName}</p> 
+                              {part.location != "" && "|"}
+                              <p className='education-institution-location'>{part.location}</p>
+                            </div>
+                            <p>{part.timeline}</p>
+                          </div>
+                          <p className='education-desc'>{part.desc}</p>
+                          <b><p>{part.marks != "" && "CGPA/Pecentage:"}{part.marks}</p></b>
+                        </div>
                       )
                     })}
                   </div>

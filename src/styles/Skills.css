@@ -4,3 +4,16 @@
     height:20px;
     align-items: center;
 }
+.skills-display {
+  display:flex;
+  margin:0px;
+}
+
+.skills-name {
+  font-weight: bold;
+}
+
+.skills-desc {
+  margin-left: 2px;
+}
+

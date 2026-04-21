@@ -3,8 +3,8 @@ import "./../styles/Skills.css"
 import {InputComponent} from "./Elements.jsx"
 
 
-export default function SkillsTemplate({isActive, onChange}) {
-    const [skills, setSkills] = useState([])
+export default function SkillsTemplate({isActive, onChange,value}) {
+    const [skills, setSkills] = useState(value)
     const [count, setCount] = useState(0)
 
     function handleAddSkill() {
@@ -21,8 +21,9 @@ export default function SkillsTemplate({isActive, onChange}) {
 
 
     function handleUpdateSkill(id,field,value) {
-        setSkills((prevSkills) => prevSkills.map((item) => item.id === id ? {...item, [field]: value}: item))
-        onChange(skills, "SKILLS")
+        const updated = skills.map((item) => item.id === id ? {...item, [field]: value}: item)
+        setSkills(updated)
+        onChange(updated, "SKILLS")
     }
 
 

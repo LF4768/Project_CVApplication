@@ -9,17 +9,23 @@ export default function EducationTemplate({isActive, onChange,value}) {
     function handleAddEducation() {
         const updated = [...education, {
             id: crypto.randomUUID(),
+            institutionName: "",
+            location: "",
+            timeline:"",
+            desc: "",
+            marks: ""
         }]
         setEducation(updated)
         onChange(updated, "EDUCATION")
     }
     
     function handleUpdateEducation(id, val, field) {
+        const updated = education.map((item) => item.id === id ? {...item, [field]: val} : item)
         setEducation((prev) => prev.map((item) => item.id === id ? {...item, [field]: val} : item))
-        onChange(education,"EDUCATION")
-
+        onChange(updated,"EDUCATION")
+        
     }
-
+    
     function handleRemoveEducation(id) {
         const updated = education.filter((item) => item.id != id)
         setEducation(updated)
@@ -37,7 +43,7 @@ export default function EducationTemplate({isActive, onChange,value}) {
                                 <InputComponent placeHolder="Institution Name" condition={isActive} value={item.institutionName} onChange={(e) => handleUpdateEducation(item.id, e, "institutionName")} />
                                 |<InputComponent placeHolder="location" condition={isActive} value={item.location} onChange={(e) => handleUpdateEducation(item.id, e, "location")} />
                             </div>
-                            <InputComponent placeHolder="passing year" condition={isActive} value={item.timeline} onChange={(e) => handleUpdateEducation(item.id, e, "timeline")} />
+                            <InputComponent placeHolder="start year - end year" condition={isActive} value={item.timeline} onChange={(e) => handleUpdateEducation(item.id, e, "timeline")} />
                         </div>
                         <div className="education-desc">
                             <InputComponent placeHolder="Description" condition={isActive} value={item.desc} onChange={(e) => handleUpdateEducation(item.id, e, "desc")} />
