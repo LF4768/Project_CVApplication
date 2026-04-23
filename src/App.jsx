@@ -215,10 +215,13 @@ function ShowContent({parts}) {
                   <div>
                     {item.content.map((part) => {
                       return (
+                        part.name == "" ? <span style={{color: "red"}}>Please Enter the Skill Name</span> : (
                         <div key={part.name} className="skills-display">
                           <p className="skills-name">{part.name}</p> {part.desc != "" && ": "}
                           <p className='skills-desc'>{part.desc}</p>
                         </div>
+                        )
+
                       )
                     })}
                   </div>
